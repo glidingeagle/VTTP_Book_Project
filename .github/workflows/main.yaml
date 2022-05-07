@@ -2,6 +2,9 @@ name: Compile, test, deploy
 on: [ "push" ]
 env: 
   GOOGLE_BOOK_APIKEY: ${{ secrets.google_book_apikey }}
+  SPRING_DATASOURCE_URL: ${{secrets.SPRING_DATASOURCE_URL}}
+  SPRING_DATASOURCE_USERNAME: ${{secrets.SPRING_DATASOURCE_USERNAME}}
+  SPRING_DATASOURCE_PASSWORD: ${{secrets.SPRING_DATASOURCE_PASSWORD}}
 jobs:
   step1:
     runs-on: ubuntu-latest
@@ -28,7 +31,7 @@ jobs:
       with:
         access_key: ${{ secrets.access_key }}
         secret_key: ${{ secrets.secret_key }}
-        space_name: bigbucket
+        space_name: vttpminiproj-book
         space_region: sgp1
         source: .github/badges/jacoco.svg
         out_dir: coverage/${{ github.event.repository.name }}
