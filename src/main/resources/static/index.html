@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search</title>
+    <style>
+        html, body {
+        height: 100%;
+        /* background: #C0D6DF */
+        background: #aee5d8
+        }
+        .main-block {
+        display: flex;
+        flex-direction: column;
+        }
+        .main-block {
+        justify-content: center;
+        align-items: center;
+        width: 100%; 
+        min-height: 100%;
+        background-size: cover;
+        }
+        form {
+        width: 75%; 
+        height: 100%;
+        padding: 25px;
+        margin-bottom: 20px;
+        background: rgba(234, 234, 234, 1);
+        }
+        input {
+        width: 50%
+        }
+        button {
+        display: block;
+        width: 80px;
+        padding: 10px;
+        margin: 20px auto 0;
+        border: none;
+        border-radius: 5px; 
+        background: #1c87c9; 
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-block">
+        <h1>Book Search</h1>
+        <p>No idea of what's your next book to read?</p>
+        <q>Quote-Put some inspiring quotes</q>
+        <form action="/search" method="GET">
+            <div>
+                <label for="q">Keyword</label>
+                <input type="text" name="query" id="q" placeholder="Type something" required>
+            </div>
+            <div>
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
