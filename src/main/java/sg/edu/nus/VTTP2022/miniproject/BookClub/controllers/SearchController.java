@@ -15,13 +15,13 @@ import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Book;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.services.SearchService;
 
 @Controller
-@RequestMapping (path="/")
+@RequestMapping
 public class SearchController {
 
     @Autowired
     private SearchService searchSvcs;
     
-    @GetMapping (path="/search")
+    @GetMapping (path="protected/search")
     public ModelAndView getBookSearch (@RequestParam (name="query") String q) {
 
         Optional<List<Book>> optBookLists = searchSvcs.getBookSearch(q);
