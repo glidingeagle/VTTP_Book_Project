@@ -1,20 +1,28 @@
 name: Deploy Release
-
-on:
+on: 
   push:
     tags:
     - 'v*'
-
+    - '!v*-alpha'
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Create GitHub release
+        uses: Roang-zero1/github-create-release-action@master
+        with:
+          version_regex: ^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+  deploy_to_heroku:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 
+      uses: actions/checkout@v2
     - name: Deploy to Heroku
-      uses: AkhileshNS/heroku-deploy@v3.12.12
+      uses: akhileshns/heroku-deploy@v3.12.12 
       with:
-        HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
-        HEROKU_APP_NAME: vttpminiproj-book
-        HEROKU_EMAIL: ${{secrets.MY_EMAIL}}
-        branch: ${{github.ref_name}}
+        heroku_api_key: ${{secrets.heroku_api_key}}
+        heroku_app_name: vttpminiproj-book
+        heroku_email: ${{secrets.MY_EMAIL}}
+        branch: ${{ github.ref_name }}
