@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,13 +26,19 @@ public class UsersAuthController {
     private UsersAuthService userAuthSvc;
 
     @GetMapping (path="/")
-    public String viewLogin () {
-        return "index";
+    public ModelAndView viewLogin () {
+        ModelAndView mvc = new ModelAndView();
+        mvc.setViewName("index");
+
+        return mvc;
     }
 
     @GetMapping(path="/signup")
-    public String viewSignup () {
-        return "signup";
+    public ModelAndView viewSignup () {
+        ModelAndView mvc = new ModelAndView();
+        mvc.setViewName("signup");
+
+        return mvc;
     }
 
     @PostMapping (path="/index")
@@ -57,14 +62,15 @@ public class UsersAuthController {
         return mvc;
     }
 
-    @DeleteMapping(path="/logout")
-    public String getLogout (HttpSession sess) {
-        sess.invalidate();
-        return "index";
+    @GetMapping (path="/logout")
+    public String getLogout (HttpSession session) {
+        session.invalidate();
+        //return "index";
+        return "redirect:/";
     }
 
     @PostMapping (path="/home")
-    public ModelAndView postMethodName (@RequestBody MultiValueMap<String, String> payload, HttpSession session) {
+    public ModelAndView postIndex (@RequestBody MultiValueMap<String, String> payload, HttpSession session) {
         String email = payload.getFirst("email");
         String password = payload.getFirst("password");
 
@@ -75,9 +81,10 @@ public class UsersAuthController {
         ModelAndView mvc = new ModelAndView();
 
         if(!userAuthSvc.authentication(email, password)) {
-            // mvc = new ModelAndView("error");
-            mvc.setViewName("error");
+            mvc.addObject("message", "Log in failed! Check with administrator.");
             mvc.setStatus(HttpStatus.FORBIDDEN);
+            // mvc = new ModelAndView("error");
+            mvc.setViewName("index");
         } else {
             session.setAttribute("email", email);
             mvc = new ModelAndView("redirect:/protected/home");
@@ -85,6 +92,4 @@ public class UsersAuthController {
         }
         return mvc;
     }
-
-    
 }

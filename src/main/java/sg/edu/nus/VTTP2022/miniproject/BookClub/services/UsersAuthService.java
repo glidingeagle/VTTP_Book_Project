@@ -15,7 +15,7 @@ public class UsersAuthService {
     private UsersRepositories usersRepo;
 
     public boolean authentication (String email, String password) {
-        return 1 == usersRepo.countUserByNameAndPassword(email, password);
+        return 1 == usersRepo.countUserByEmailAndPassword(email, password);
     }
 
     public void enterNewUser (User user) throws UsersException {

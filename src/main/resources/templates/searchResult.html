@@ -28,7 +28,7 @@
         display: flex;
         flex-direction: column;
         }
-        /* .main block */
+        /*.main block*/
         .container {
         justify-content: center;
         align-items: center;
@@ -81,6 +81,32 @@
                 <button type="submit">Search</button>
             </div>
         </form>
+
+        <h4>Search: <span data-th-text="${message}"></span></h4>
+        <table>
+            <tbody>
+                <tr data-th-each="book:${books}">
+                    <td><img data-th-src="${book.imageLink}" alt=""></td>
+                    <td>
+                        <span data-th-text="|Book ID: ${book.book_id}|"></span>
+                        <br>
+                        <span data-th-text="|Title: ${book.title}|"></span>
+                        <br>
+                        <span data-th-text="|Author: ${book.authors}|"></span>
+                        <br>
+                        <span><a data-th-href="${book.infoLink}">Click here for more details</a></span>
+                        <br>
+                    </td>
+                    <td>
+                        <form action="/protected/search/searchResult/added" method="post">
+                            <input type="hidden" name="book_id" data-th-value="${book.book_id}">
+                            <button type="submit">Add</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>       
+        </table>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>

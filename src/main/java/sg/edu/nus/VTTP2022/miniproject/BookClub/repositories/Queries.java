@@ -11,15 +11,25 @@ public interface Queries {
     //Find existing user in database
     public static final String SQL_FIND_USER_BY_EMAIL = "select * from users where email = ?";
 
-    //Create myLibrary for a specific user in homepage
-    // public static final String SQL_GET_USER_BOOK_LIBRARY = "select users.user_id, users.username, reviews.review_id, reviews.review_status, reviews.review_rating, reviews.review_quotes, reviews.review_comments, books.book_id, books.book_title, books.book_authors, books.book_imageLinks from users inner join reviews on users.user_id = reviews.user_id inner join books on reviews.book_id = books.book_id where users.user_id = ?";
-    public static final String SQL_GET_USER_BOOK_LIBRARY = "select * from reviews where user_id = ?";
-
+    //Create myLibrary, collection of book for a specific user in homepage
+    //Add book from google book API
     //for transaction
-    //need to check whether books are already in the database
-    public static final String SQL_COUNT_BOOK_BY_TITLE = "select count(*) as title_count from books where book_title = ?";
-    //Insert status on books into myLibrary
-    public static final String SQL_INSERT_NEW_BOOK_STATUS = "insert into reviews (review_status, review_rating, review_quotes, review_comments, user_id, book_id) values (?, ?, ?, ?, ?, ?)";
-    //Insert new books into myLibrary
-    public static final String SQL_INSERT_NEW_BOOK_COLLECTION = "insert into books (book_title, book_authors, book_infoLink, book_imageLinks) values (?, ?, ?, ?)";
+    public static final String SQL_INSERT_NEW_BOOK_INTO_COLLECTION = "insert into books (book_id, title, infoLink, imageLink) values (?, ?, ?, ?)";
+
+    public static final String SQL_INSERT_NEW_COMMENT_FOR_A_BOOK = "insert into reviews (user_id, book_id) values (?, ?)";
+
+    public static final String SQL_COUNT_BOOK_BY_BOOK_ID = "select count(*) as book_countbyid from books where book_id = ?";
+
+    public static final String SQL_COUNT_REVIEW_BY_USERID_AND_BOOKID = "select count(*) as review_count from reviews where user_id = ? and book_id = ?";
+
+    // This is for home display but not sure how will I use it so that I can display the objective of line 14
+    public static final String SQL_GET_USER_BOOK_LIBRARY_FOR_DIFF_STATUS = "select books.title, books.imageLink from reviews right join books on reviews.book_id = books.book_id where reviews.user_id = ? and reviews.status = ?";
+    
+    //Queries below are for post
+    //Write comment to a book
+    public static final String SQL_INSERT_COMMENT_FOR_A_BOOK = "insert into reviews (status, rating, comment, user_id, book_id) values (?, ?, ?, ?, ?)";
+    
+    //Update comment to a book
+    public static final String SQL_UPDATE_STATUS_TO_REVIEW = "update reviews set status = ?, rating = ?, comment = ? where user_id = ? and book_id = ?";
+
 }

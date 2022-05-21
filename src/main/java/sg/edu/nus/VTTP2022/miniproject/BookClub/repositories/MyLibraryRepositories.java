@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Book;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Review;
 
 import static sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.Queries.*;
@@ -20,19 +21,39 @@ public class MyLibraryRepositories {
     @Autowired
     private JdbcTemplate template;
 
-    public Optional<List<Review>> findBooksAndReviewsByUserId (String user_id) {
+    public Optional<List<Book>> findBookReviewStatus (String user_id, int status) {
         
-        List<Review> reviewLists = new LinkedList<>();
+        List<Book> books = new LinkedList<>();
+    
+        SqlRowSet rs = template.queryForRowSet(SQL_GET_USER_BOOK_LIBRARY_FOR_DIFF_STATUS, user_id, status);
 
-        SqlRowSet rs = template.queryForRowSet(SQL_GET_USER_BOOK_LIBRARY, user_id);
-        
-        if(!rs.next())
-            return Optional.empty();
+        // if(!rs.next()) {
+        //     return Optional.empty();
+        // }
 
-        while(rs.next()) {
-            Review review = convertReview(rs);
-            reviewLists.add(review);
+        while (rs.next()) {
+            Book book = convertBook(rs);
+            System.out.println(book);
+            books.add(book);
         }
-        return Optional.of(reviewLists);
+        return Optional.of(books);
     }
+
+    //I will need to use below code from line 26 to line 42
+
+    // public Optional<List<Review>> findBooksAndReviewsByUserId (String user_id) {
+        
+    //     List<Review> reviewLists = new LinkedList<>();
+
+    //     SqlRowSet rs = template.queryForRowSet(SQL_GET_USER_BOOK_LIBRARY, user_id);
+        
+    //     if(!rs.next())
+    //         return Optional.empty();
+
+    //     while(rs.next()) {
+    //         Review review = convertReview(rs);
+    //         reviewLists.add(review);
+    //     }
+    //     return Optional.of(reviewLists);
+    // }
 }

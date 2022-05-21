@@ -19,7 +19,7 @@ public class UsersRepositories {
     private JdbcTemplate template;
 
     //for logging in
-    public int countUserByNameAndPassword(String email, String password) {
+    public int countUserByEmailAndPassword(String email, String password) {
         SqlRowSet rs = template.queryForRowSet(SQL_COUNT_USER_BY_EMAIL, email, password);
         
         if (!rs.next())
