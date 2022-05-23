@@ -51,7 +51,7 @@ public class AddBookService {
                 excep.printStackTrace();
                 throw excep;
             }  
-        } else if (addBookRepo.countBookByID (book_id) == 0 && addBookRepo.countReviewByUserAndBook(user_id, book_id) != 0) {
+        } /*else if (addBookRepo.countBookByID (book_id) == 0 && addBookRepo.countReviewByUserAndBook(user_id, book_id) != 0) {
             try {
                 Book book = searchSvcs.getBookSearchById(book_id);
                 addBookRepo.insertBookRecord(book);
@@ -59,7 +59,7 @@ public class AddBookService {
                 excep.printStackTrace();
                 throw excep;
             }        
-        } else if (addBookRepo.countReviewByUserAndBook(user_id, book_id) == 0 && addBookRepo.countBookByID (book_id) != 0) {
+        }*/ else if (addBookRepo.countReviewByUserAndBook(user_id, book_id) == 0 && addBookRepo.countBookByID (book_id) != 0) {
             try {
                 addBookRepo.insertReviewRecord(user_id, book_id);
             }catch (Exception excep) {

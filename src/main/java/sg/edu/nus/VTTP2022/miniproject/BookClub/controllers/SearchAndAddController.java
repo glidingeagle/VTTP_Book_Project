@@ -93,7 +93,7 @@ public class SearchAndAddController {
         String message = null;
         try {
             addBookSvcs.addBookAndReview(user_id, book_id); 
-            message = "Added successfully";
+            message = "Added successfully!";
         } catch (Exception excep) {
             message = "Book record has already been recorded in the database and you have already gotten a review on the book";
         }

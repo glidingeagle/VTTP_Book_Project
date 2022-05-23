@@ -48,13 +48,40 @@ public class SearchAndAddControllerTest {
         }
     }
 
-    // @Test
-    // public void getSearchQueryTest() {
+    @Test
+    public void getSearchQueryTest() {
 
+        RequestBuilder req = MockMvcRequestBuilders
+                .get("/protected/search/searchResult")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .queryParam("q", "Dan Brown")
+                .sessionAttr("email", "wilma@hotmail.com");
+
+        MvcResult result = null;
+        try {
+            result = mockMvc.perform(req).andReturn();
+        } catch (Exception ex) {
+            fail("cannot perform mvc invocation", ex);
+            return;
+        }
+
+        MockHttpServletResponse resp = result.getResponse();
+        try {
+            String payload = resp.getContentAsString();
+            assertTrue(payload.contains("Dan Brown"));
+            assertNotNull(payload);
+        } catch (Exception ex) {
+            fail("cannot retrieve response payload", ex);
+            return;
+        }
+    }
+
+    // @Test
+    // public void addingBookToLibraryTest() {
     //     RequestBuilder req = MockMvcRequestBuilders
-    //             .post("/protected/search/searchResult")
-    //             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-    //             .queryParam("q", "Stephen King")
+    //             .post("/protected/search/searchResult/added")
+    //             .accept(MediaType.APPLICATION_FORM_URLENCODED)
+    //             .queryParam("book_id", "ZuKTvERuPG8C")
     //             .sessionAttr("email", "wilma@hotmail.com");
 
     //     MvcResult result = null;
@@ -68,29 +95,7 @@ public class SearchAndAddControllerTest {
     //     MockHttpServletResponse resp = result.getResponse();
     //     try {
     //         String payload = resp.getContentAsString();
-    //         assertTrue(payload.contains("Stephen King"));
-    //         assertNotNull(payload);
-    //     } catch (Exception ex) {
-    //         fail("cannot retrieve response payload", ex);
-    //         return;
-    //     }
-    // }
-
-    // @Test
-    // public void addingBookToLibraryTest() {
-    //     RequestBuilder req = MockMvcRequestBuilders.get("/protected/search").accept(MediaType.TEXT_HTML_VALUE);
-
-    //     MvcResult result = null;
-    //     try {
-    //         result = mockMvc.perform(req).andReturn();
-    //     } catch (Exception ex) {
-    //         fail("cannot perform mvc invocation", ex);
-    //         return;
-    //     }
-
-    //     MockHttpServletResponse resp = result.getResponse();
-    //     try {
-    //         String payload = resp.getContentAsString();
+    //         assertTrue(payload.contains("Added successfully!"));
     //         assertNotNull(payload);
     //     } catch (Exception ex) {
     //         fail("cannot retrieve response payload", ex);

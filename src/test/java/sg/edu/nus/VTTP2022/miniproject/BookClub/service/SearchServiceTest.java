@@ -1,5 +1,6 @@
 package sg.edu.nus.VTTP2022.miniproject.BookClub.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,7 +22,13 @@ public class SearchServiceTest {
 
     @Test
     public void shouldReturnAListOfBooks() {
-        Optional<List<Book>> bookListOpt = searchSvcs.getBookSearch("Stephen King");
+        Optional<List<Book>> bookListOpt = searchSvcs.getBookSearch("Dan Brown");
         assertTrue(bookListOpt.isPresent());
+    }
+
+    @Test
+    public void shouldReturnABook() {
+        Book book = searchSvcs.getBookSearchById("jJaLBgAAQBAJ");
+        assertEquals("Corporate Finance", book.getTitle());
     }
 }
