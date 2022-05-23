@@ -38,6 +38,8 @@ public class SearchService {
         System.out.println(">>>> API key set: " + hasKey);
     }
 
+    // private static List<Book> books = new LinkedList<>();
+
     public Optional<List<Book>> getBookSearch(String q) {
 
         //building the urlString
@@ -70,8 +72,9 @@ public class SearchService {
             JsonReader reader = Json.createReader(is);
             JsonArray bookArray = reader.readObject().getJsonArray("items");
 
-            List<Book> books = new LinkedList<>();
+            System.out.println(">>>> books json: " + bookArray.toString());
 
+            List<Book> books = new LinkedList<>();
             for (int i = 0; i < bookArray.size(); i++) {
                 JsonObject objBooks = bookArray.getJsonObject(i);
                 Book book = new Book();
@@ -79,7 +82,6 @@ public class SearchService {
                 book.setTitle(objBooks.getJsonObject("volumeInfo").getString("title"));
                 book.setInfoLink(objBooks.getJsonObject("volumeInfo").getString("infoLink"));
                 book.setImageLink(objBooks.getJsonObject("volumeInfo").getJsonObject("imageLinks").getString("smallThumbnail"));
-
 
                 JsonArray authorLists = objBooks.getJsonObject("volumeInfo").getJsonArray("authors");
                 System.out.println(">>> authors: " + authorLists);
@@ -97,6 +99,7 @@ public class SearchService {
 
                 books.add(book);
             }
+            System.out.println(">>>>>> books size: " + books.size());
             return Optional.of(books);
         } catch (Exception ex) {
             ex.printStackTrace();
