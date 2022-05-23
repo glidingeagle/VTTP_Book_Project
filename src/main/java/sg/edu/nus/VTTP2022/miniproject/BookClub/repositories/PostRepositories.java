@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-
 import static sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.Queries.*;
-
-import java.util.Optional;
 
 @Repository
 public class PostRepositories {

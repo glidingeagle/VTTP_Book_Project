@@ -22,12 +22,12 @@ public class PostService {
     private AddBookRepositories addBookRepo;
 
     @Transactional (rollbackFor = Exception.class)
-    public void addPost (MultiValueMap<String, String> form) {
+    public void addPost (MultiValueMap<String, String> form) throws Exception{
 
         String user_id = form.getFirst("user_id");
         String book_id = form.getFirst("book_id");
-        int status = Integer.parseInt(form.getFirst("status"));
-        float rating = Float.parseFloat(form.getFirst("rating"));
+        Integer status = Integer.parseInt(form.getFirst("status"));
+        Float rating = Float.valueOf(form.getFirst("rating"));
         String comment = form.getFirst("comment");
 
         System.out.println(user_id);
@@ -36,21 +36,42 @@ public class PostService {
         System.out.println(rating);
         System.out.println(comment);
 
-        //Can I write a try catch block along with transaction?
-        //Can I try catch block within the if block or can I wrap it at the end of the if's blocks?
-
         if (addBookRepo.countBookByID (book_id) == 0 && addBookRepo.countReviewByUserAndBook(user_id, book_id) == 0) {
-            Book book = searchSvcs.getBookSearchById(book_id);
-            addBookRepo.insertBookRecord(book);
-            postRepo.insertPostToReview(status, rating, comment, user_id, book_id);
+            try{
+                Book book = searchSvcs.getBookSearchById(book_id);
+                addBookRepo.insertBookRecord(book);
+                postRepo.insertPostToReview(status, rating, comment, user_id, book_id);
+            } catch (Exception excep) {
+                excep.printStackTrace();
+                throw excep;
+            } 
         } else if (addBookRepo.countBookByID (book_id) == 0 && addBookRepo.countReviewByUserAndBook(user_id, book_id) != 0) {
-            Book book = searchSvcs.getBookSearchById(book_id);
-            addBookRepo.insertBookRecord(book);
-            postRepo.updatePostToReview(status, rating, comment, user_id, book_id);
+            try {
+                Book book = searchSvcs.getBookSearchById(book_id);
+                addBookRepo.insertBookRecord(book);
+                postRepo.updatePostToReview(status, rating, comment, user_id, book_id);
+            } catch (Exception excep) {
+                excep.printStackTrace();
+                throw excep;
+            }  
         } else if (addBookRepo.countBookByID (book_id) != 0 && addBookRepo.countReviewByUserAndBook(user_id, book_id) == 0) {
-            postRepo.insertPostToReview(status, rating, comment, user_id, book_id);
+
+            try {
+                postRepo.insertPostToReview(status, rating, comment, user_id, book_id);
+            } catch (Exception excep) {
+                excep.printStackTrace();
+                throw excep;
+            }  
+            
         } else if (addBookRepo.countBookByID (book_id) != 0 && addBookRepo.countReviewByUserAndBook(user_id, book_id) != 0) {
-            postRepo.updatePostToReview(status, rating, comment, user_id, book_id);
-        }
+            try {
+                postRepo.updatePostToReview(status, rating, comment, user_id, book_id);
+            } catch (Exception excep) {
+                excep.printStackTrace();
+                throw excep;
+            }  
+            
+        } 
+        
     }
 }

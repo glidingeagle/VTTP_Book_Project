@@ -1,27 +1,27 @@
 package sg.edu.nus.VTTP2022.miniproject.BookClub.models;
 
 public class Review {
-    private int review_id;
-    private int status;
-    private float rating;
+    private Integer review_id;
+    private Integer status;
+    private Float rating;
     private String comment;
 
-    public int getReview_id() {
+    public Integer getReview_id() {
         return review_id;
     }
-    public void setReview_id(int review_id) {
+    public void setReview_id(Integer review_id) {
         this.review_id = review_id;
     }
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
-    public float getRating() {
+    public Float getRating() {
         return rating;
     }
-    public void setRating(float rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
     public String getComment() {

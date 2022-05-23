@@ -10,7 +10,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Book;
-import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Review;
 
 import static sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.Queries.*;
 import static sg.edu.nus.VTTP2022.miniproject.BookClub.models.ConversionUtils.*;

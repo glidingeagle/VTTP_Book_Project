@@ -1,15 +1,6 @@
 package sg.edu.nus.VTTP2022.miniproject.BookClub.models;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.LinkedList;
 import java.util.List;
-
-import jakarta.json.Json;
-import jakarta.json.JsonArray;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonReader;
 
 public class Book {
     private String book_id;

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Book;
-import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Review;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.User;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.MyLibraryRepositories;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.UsersRepositories;
