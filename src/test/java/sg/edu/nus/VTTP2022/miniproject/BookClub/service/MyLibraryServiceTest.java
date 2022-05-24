@@ -31,12 +31,12 @@ public class MyLibraryServiceTest {
         template.execute("insert into books (book_id, title, infoLink, imageLink) values ('osqizgEACAAJ', 'Economics in Practice: Evidence-Based Policymaking in Singapore', 'http://books.google.com.sg/books?id=osqizgEACAAJ&dq=economics&hl=&source=gbs_api', 'http://books.google.com/books/content?id=osqizgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api')");
         template.execute("insert into books (book_id, title, infoLink, imageLink) values ('HObsDQAAQBAJ', 'The Everything Economics Book', 'https://play.google.com/…sDQAAQBAJ&source=gbs_api', 'http://books.google.com/books/content?id=HObsDQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api')");
         template.execute("insert into books (book_id, title, infoLink, imageLink) values ('ILxNEAAAQBAJ', 'Doing Economics', 'http://books.google.com.sg/books?id=ILxNEAAAQBAJ&dq=economics&hl=&source=gbs_api', 'http://books.google.com/books/content?id=ILxNEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api')");
-        template.execute("insert into reviews (review_id, status, user_id, book_id) values ('8', 1, '2628f42a', 'zOE2DwAAQBAJ')");
-        template.execute("insert into reviews (review_id, status, user_id, book_id) values ('9', 1, '2628f42a', 'F_QxEAAAQBAJ')");
-        template.execute("insert into reviews (review_id, status, user_id, book_id) values ('10', 2, '2628f42a', 'DdPgDwAAQBAJ')");
-        template.execute("insert into reviews (review_id, status, user_id, book_id) values ('11', 2, '2628f42a', 'osqizgEACAAJ')");
-        template.execute("insert into reviews (review_id, status, user_id, book_id) values ('12', 3, '2628f42a', 'HObsDQAAQBAJ')");
-        template.execute("insert into reviews (review_id, status, user_id, book_id) values ('13', 3, '2628f42a', 'ILxNEAAAQBAJ')");
+        template.execute("insert into reviews (status, user_id, book_id) values (1, '2628f42a', 'zOE2DwAAQBAJ')");
+        template.execute("insert into reviews (status, user_id, book_id) values (1, '2628f42a', 'F_QxEAAAQBAJ')");
+        template.execute("insert into reviews (status, user_id, book_id) values (2, '2628f42a', 'DdPgDwAAQBAJ')");
+        template.execute("insert into reviews (status, user_id, book_id) values (2, '2628f42a', 'osqizgEACAAJ')");
+        template.execute("insert into reviews (status, user_id, book_id) values (3, '2628f42a', 'HObsDQAAQBAJ')");
+        template.execute("insert into reviews (status, user_id, book_id) values (3, '2628f42a', 'ILxNEAAAQBAJ')");
     } 
 
     @AfterEach
