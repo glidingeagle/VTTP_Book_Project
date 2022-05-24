@@ -25,7 +25,7 @@ public class MyLibraryController {
 
     @GetMapping(path="/home")
     //@PostMapping //(path="/protected/")
-    public ModelAndView post (HttpSession session) {
+    public ModelAndView getHome (HttpSession session) {
 
         String email = (String)session.getAttribute("email");
         System.out.printf(">>> email: %s\n", email);

@@ -1,7 +1,5 @@
 package sg.edu.nus.VTTP2022.miniproject.BookClub.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -29,6 +27,6 @@ public class SearchServiceTest {
     @Test
     public void shouldReturnABook() {
         Book book = searchSvcs.getBookSearchById("jJaLBgAAQBAJ");
-        assertEquals("Corporate Finance", book.getTitle());
+        assertTrue(book.getTitle().contains("Corporate Finance"));
     }
 }
