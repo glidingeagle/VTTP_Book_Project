@@ -42,9 +42,12 @@ public class SearchService {
 
     public Optional<List<Book>> getBookSearch(String q) {
 
+        String maxResults = "8";
+
         //building the urlString
         String googleBookUrl = UriComponentsBuilder.fromUriString(URL)
                 .queryParam("q", q.trim().replaceAll(" ", "+"))
+                .queryParam("maxResults", maxResults)
                 .queryParam("key", apiKey)
                 .toUriString();
         

@@ -90,6 +90,12 @@ public class SearchAndAddController {
         String user_id = user.getUser_id();
         String username = user.getUsername();
 
+        List<Book> wantToRead = myLibSvcs.getWantToReadBook(user_id, 1);
+
+        List<Book> currentlyReading = myLibSvcs.getCurrentlyReadingBook(user_id, 2);
+
+        List<Book> read = myLibSvcs.getReadBook(user_id, 3);
+
         String message = null;
         try {
             addBookSvcs.addBookAndReview(user_id, book_id); 
@@ -102,6 +108,9 @@ public class SearchAndAddController {
         mvc.setViewName("home");
         mvc.addObject("username", username);
         mvc.addObject("user_id", user_id);
+        mvc.addObject("wantToRead", wantToRead);
+        mvc.addObject("currentlyReading", currentlyReading);
+        mvc.addObject("read", read);
         mvc.addObject("message", message);
         mvc.setStatus(HttpStatus.OK);
 
