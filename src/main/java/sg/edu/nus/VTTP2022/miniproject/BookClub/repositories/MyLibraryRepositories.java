@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Book;
+import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Review;
 
 import static sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.Queries.*;
 import static sg.edu.nus.VTTP2022.miniproject.BookClub.models.ConversionUtils.*;
@@ -38,21 +39,38 @@ public class MyLibraryRepositories {
         return Optional.of(books);
     }
 
-    //I will need to use below code from line 26 to line 42
+    public Review findBooksAndReviewsByUserId (String user_id, String book_id) {
 
-    // public Optional<List<Review>> findBooksAndReviewsByUserId (String user_id) {
+        Review review = new Review();
+
+        SqlRowSet rs = template.queryForRowSet(SQL_GET_REVIEW_BY_USERID_AND_BOOKID, user_id, book_id);
         
-    //     List<Review> reviewLists = new LinkedList<>();
+        // if(!rs.next())
+        //     return review;
 
-    //     SqlRowSet rs = template.queryForRowSet(SQL_GET_USER_BOOK_LIBRARY, user_id);
-        
-    //     if(!rs.next())
-    //         return Optional.empty();
+        while(rs.next()) {
+            review = convertReview(rs);
+        }
 
-    //     while(rs.next()) {
-    //         Review review = convertReview(rs);
-    //         reviewLists.add(review);
-    //     }
-    //     return Optional.of(reviewLists);
-    // }
+        return review;
+    }
+
+    public Book findBookByBookId (String book_id) {
+
+        Book book = new Book();
+
+        SqlRowSet rs = template.queryForRowSet(SQL_GET_BOOK_BY_BOOKID, book_id);
+
+        // if(!rs.next())
+        //     return book;
+
+        while(rs.next()) {
+            book.setBook_id(rs.getString("book_id"));
+            book.setTitle(rs.getString("title"));
+            book.setImageLink(rs.getString("imageLink"));
+            book.setInfoLink(rs.getString("infoLink"));
+        }
+
+        return book;
+    }
 }

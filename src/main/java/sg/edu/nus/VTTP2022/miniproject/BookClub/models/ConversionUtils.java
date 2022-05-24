@@ -35,17 +35,18 @@ public class ConversionUtils {
     }
 
     //retrieve reviews from specific user
-    // public static Review convertReview (SqlRowSet rs) {
-    //     Review review = new Review();
-    //     review.setReview_id(rs.getInt("review_id"));
-    //     review.setStatus(rs.getInt("status"));
-    //     review.setComment(rs.getString("comments"));
-    //     return review;
-    // }
+    public static Review convertReview (SqlRowSet rs) {
+        Review review = new Review();
+        review.setReview_id(rs.getInt("review_id"));
+        review.setRating(rs.getFloat("rating"));
+        review.setComment(rs.getString("comment"));
+        return review;
+    }
 
     //retrieve book from book_id
     public static Book convertBook (SqlRowSet rs) {
         Book book = new Book();
+        book.setBook_id(rs.getString("book_id"));
         book.setTitle(rs.getString("title"));
         book.setImageLink(rs.getString("imageLink"));
         return book;

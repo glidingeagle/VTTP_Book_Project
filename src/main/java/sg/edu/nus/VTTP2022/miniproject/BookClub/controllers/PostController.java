@@ -35,7 +35,7 @@ public class PostController {
     }
 
     @PostMapping(path="/post/posted")
-    public ModelAndView writeAPost (@RequestBody MultiValueMap<String, String> form, HttpSession session) {
+    public ModelAndView writeAPost (@RequestBody MultiValueMap<String, String> form, HttpSession session){
         ModelAndView mvc = new ModelAndView();
         if(session.getAttribute("email") == null) {
             mvc.setViewName("redirect:/");
@@ -54,12 +54,15 @@ public class PostController {
         // System.out.println(user_id_from_login);
 
         // String message = null;
-        // try {
-        //     if (user_id == user_id_from_login)
+        // if (user_id == user_id_from_login) {
+        //     try {
         //         postSvcs.addPost(form); 
-        //     message = "Posted successfully!";
-        // } catch (PostException excep) {
-        //     message = "An error has occurred when posting!";
+        //         message = "Posted successfully!";
+        //     } catch (Exception excep) {
+        //         message = "An error has occurred when posting!";
+        //     }
+        // } else if (user_id != user_id_from_login) {
+        //     message = "Action Forbidden!";
         // }
 
         String message = null;

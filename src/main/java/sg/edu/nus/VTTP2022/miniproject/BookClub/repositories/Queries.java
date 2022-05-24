@@ -22,8 +22,12 @@ public interface Queries {
 
     public static final String SQL_COUNT_REVIEW_BY_USERID_AND_BOOKID = "select count(*) as review_count from reviews where user_id = ? and book_id = ?";
 
+    public static final String SQL_GET_REVIEW_BY_USERID_AND_BOOKID = "select * from reviews where user_id = ? and book_id = ?";
+
+    public static final String SQL_GET_BOOK_BY_BOOKID = "select * from books where book_id = ?";
+
     // This is for home display but not sure how will I use it so that I can display the objective of line 14
-    public static final String SQL_GET_USER_BOOK_LIBRARY_FOR_DIFF_STATUS = "select books.title, books.imageLink from reviews right join books on reviews.book_id = books.book_id where reviews.user_id = ? and reviews.status = ?";
+    public static final String SQL_GET_USER_BOOK_LIBRARY_FOR_DIFF_STATUS = "select books.book_id, books.title, books.imageLink from reviews right join books on reviews.book_id = books.book_id where reviews.user_id = ? and reviews.status = ?";
     
     //Queries below are for post
     //Write comment to a book

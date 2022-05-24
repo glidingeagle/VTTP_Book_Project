@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Book;
+import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Review;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.User;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.MyLibraryRepositories;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.repositories.UsersRepositories;
@@ -47,6 +48,7 @@ public class MyLibraryService {
                 Book wantToReadBook = wantToRead.get(i);
                 wantToReadBook.getImageLink();
                 wantToReadBook.getTitle();
+                wantToReadBook.getBook_id();
             }
         }
         return wantToRead;
@@ -67,6 +69,7 @@ public class MyLibraryService {
                 Book currentlyReadingBook = currentlyReading.get(i);
                 currentlyReadingBook.getImageLink();
                 currentlyReadingBook.getTitle();
+                currentlyReadingBook.getBook_id();
             }
         }
         return currentlyReading;
@@ -86,6 +89,7 @@ public class MyLibraryService {
                 Book readBook = read.get(i);
                 readBook.getImageLink();
                 readBook.getTitle();
+                readBook.getBook_id();
             }
         }
         return read;
@@ -93,19 +97,24 @@ public class MyLibraryService {
 
     //this is for viewing rating and comments when click into the imageLink in Homepage
 
-    // public List<Review> getUserLibrary(String user_id) {
+    public Review getUserLibraryOneReview (String user_id, String book_id) {
 
-    //     Optional<List<Review>> optReviewLists = myLibraryRepo.findBooksAndReviewsByUserId(user_id);
+        Review review = myLibraryRepo.findBooksAndReviewsByUserId(user_id, book_id);
         
-    //     List<Review> reviewLists = new LinkedList<>();
+        // List<Review> reviewLists = new LinkedList<>();
 
-    //     if(optReviewLists.isEmpty()) {
-    //         reviewLists = null;
-    //     }
+        // if(review.isEmpty()) {
+        //     reviewLists = null;
+        // }
         
-    //     if(optReviewLists.isPresent()) {
-    //         reviewLists = optReviewLists.get();
-    //     } 
-    //     return reviewLists;
-    // }
+        // if(optReviewLists.isPresent()) {
+        //     reviewLists = optReviewLists.get();
+        // } 
+        return review;
+    }
+
+    public Book getUserLibrarySelectedBook (String book_id) {
+        Book book = myLibraryRepo.findBookByBookId(book_id);
+        return book;
+    }
 }

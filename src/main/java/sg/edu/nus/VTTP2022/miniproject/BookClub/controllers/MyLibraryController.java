@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Book;
+import sg.edu.nus.VTTP2022.miniproject.BookClub.models.Review;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.models.User;
 import sg.edu.nus.VTTP2022.miniproject.BookClub.services.MyLibraryService;
 
@@ -76,6 +78,36 @@ public class MyLibraryController {
         mvc.addObject("wantToRead", wantToRead);
         mvc.addObject("currentlyReading", currentlyReading);
         mvc.addObject("read", read);
+        mvc.setStatus(HttpStatus.OK);
+
+        return mvc;
+    }
+
+    @GetMapping (path="/home/{book_id}")
+    public ModelAndView getMyLibraryBookReview (@PathVariable (value="book_id") String book_id, HttpSession session) {
+        ModelAndView mvc = new ModelAndView();
+        if(session.getAttribute("email") == null) {
+            mvc.setViewName("redirect:/");
+            return mvc;
+        }
+
+        String email = (String)session.getAttribute("email");
+        System.out.printf(">>> email: %s\n", email);
+
+        User user = myLibSvcs.getUser(email);
+        String user_id = user.getUser_id();
+        String username = user.getUsername();
+
+        System.out.println(username);
+        System.out.println(book_id);
+
+        Review review = myLibSvcs.getUserLibraryOneReview(user_id, book_id);
+        Book book = myLibSvcs.getUserLibrarySelectedBook(book_id);
+        System.out.println(review);
+        System.out.println(book);
+        mvc.setViewName("bookReview");
+        mvc.addObject("review", review);
+        mvc.addObject("book", book);
         mvc.setStatus(HttpStatus.OK);
 
         return mvc;

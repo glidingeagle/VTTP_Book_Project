@@ -21,53 +21,29 @@
       <div th:replace="~{fragments/navigation :: navigation}" class="menu-bar"></div>
     </header>
     <section>
-        <div>
+        <div class="container">
           <h1>Welcome <span th:text="${username}"></span> (<span th:text="${user_id}"></span>)!</h1>
+          <div class="row">
+            <h3>Read</h3> 
+            <div class="col-md-4" th:each="r:${read}">
+                <a class="btn btn-link" th:href="@{'/protected/home/' + ${r.book_id}}"><img th:src="${r.imageLink}" alt=""></a>
+                <p data-th-text="|Title: ${r.title}|"></p>
+            </div>
         </div>
-        <div>
-          <h3>Read</h3>
-          <table>
-            <tbody>
-                <tr data-th-each="r:${read}">
-                    <td><img data-th-src="${r.imageLink}" alt=""></td>
-                    <td>
-                        <span data-th-text="|Title: ${r.title}|"></span>
-                        <br>
-                    </td>
-                </tr>
-            </tbody>       
-        </table>
+        <div class="row">
+            <h3>Currently Reading</h3> 
+            <div class="col-md-4" data-th-each="c:${currentlyReading}">
+                <a class="btn btn-link" th:href="@{'/protected/home/' + ${c.book_id}}"><img th:src="${c.imageLink}" alt=""></a>
+                <p data-th-text="|Title: ${c.title}|"></p>
+            </div>
         </div>
-        <div>
-          <h3>Currently reading</h3>
-          <table>
-            <tbody>
-                <tr data-th-each="c:${currentlyReading}">
-                    <td><img data-th-src="${c.imageLink}" alt=""></td>
-                    <td>
-                        <span data-th-text="|Title: ${c.title}|"></span>
-                        <br>
-                    </td>
-                </tr>
-            </tbody>       
-        </table>
-        </div>
-        <div>
-          <h3>Want to Read</h3>
-          <table>
-            <tbody>
-                <tr data-th-each="w:${wantToRead}">
-                    <td><img data-th-src="${w.imageLink}" alt=""></td>
-                </tr>
-                <tr data-th-each="w:${wantToReadBook}">
-                    <td>
-                        <span data-th-text="|Title: ${w.title}|"></span>
-                        <br>
-                    </td>
-                </tr>
-            </tbody>       
-        </table>
-        </div>
+        <div class="row">
+            <h3>Want To Read</h3> 
+            <div class="col-md-4" data-th-each="w:${wantToRead}">
+                <a class="btn btn-link" th:href="@{'/protected/home/' + ${w.book_id}}"><img th:src="${w.imageLink}" alt=""></a>
+                <p data-th-text="|Title: ${w.title}|"></p>
+            </div>
+        </div> 
         <div data-th-if="${message}">
             <h1 data-th-text="|Message: ${message}|"></h1>
         </div>

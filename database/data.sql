@@ -16,9 +16,12 @@ insert into books (book_id, title, infoLink, imageLink)
 
 insert into reviews (status, rating, comment, user_id, book_id)
 	values
-		(3, 3.5, 'The book wasn\'t bad. I enjoyed it.', '3a308b4c', 'yng_CwAAQBAJ'),
-        (2, null, null, '3a308b4c', 'eiNnSBqWvU0C'),
-        (1, null, null, '3a308b4c', 'yBDBEGBIUmgC'),
-        (3, 4, 'An awesome book. The slap on the face everyone needs it! The author has it\'s own way of writting things and it can be brutal and sound like an arrogant person, but it\'s so well written!', '7d40823b', 'eiNnSBqWvU0C'),
-        (3, 4, 'Slow read but good perspective on how to build a better life for ourself.', '2628f42a', 'G2qxDwAAQBAJ');
+		(3, 4.0, 'Brimming with facts, science, mythology, and arts - this book is a worthy time investment for this alone. A style that you can expect from Dan Brown. That being said, in my opinion, the book is packed with climax that draws you in. The overall direction from the start to finish was captivating.', '3a308b4c', 'Pz4YDQAAQBAJ'),
+        (3, 4.0, 'Dan Brown never fail to surprise me. He is just excellent when it comes to his thrillers. A book that is indescribable!', '3a308b4c', 'QHsF2134iY0C'),
+        (3, 4.5, 'Success is not a random act. It arises out of a predictable and powerful set of circumstances and opportunities.', '3a308b4c', 'ialrgIT41OAC'),
+        (3, 4.5, 'The first task of Blink is to convince you of a simple fact: decisions made very quickly can be every bit as good as decisions made cautiously and deliberately.', '3a308b4c', 'VKGbb1hg8JAC'),
+        (2, null, null, '3a308b4c', '5fqbz_qGi0AC');
+        (2, null, null, '3a308b4c', 'GFevO-QxQDgC');
+        (1, null, null, '3a308b4c', 'ZuKTvERuPG8C');
+        (1, null, null, '3a308b4c', 'FmyBAwAAQBAJ');
 

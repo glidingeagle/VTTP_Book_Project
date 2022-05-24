@@ -60,9 +60,8 @@ public class PostService {
             } catch (Exception excep) {
                 excep.printStackTrace();
                 throw excep;
-            }  
-            
-        } 
+            }    
+        }
         
     }
 }

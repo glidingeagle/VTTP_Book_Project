@@ -17,7 +17,7 @@ public class AddBookService {
     private SearchService searchSvcs;
     
     @Transactional (rollbackFor = Exception.class)
-    public void addBookAndReview (String user_id, String book_id) throws Exception {
+    public void addBookAndReview (String user_id, String book_id) throws Exception, BookAndReviewExistedException {
 
         if (addBookRepo.countBookByID (book_id) == 0 && addBookRepo.countReviewByUserAndBook(user_id, book_id) == 0) {
             try {
@@ -35,7 +35,9 @@ public class AddBookService {
                 excep.printStackTrace();
                 throw excep;
             }
-        }   
+        } else if (addBookRepo.countReviewByUserAndBook(user_id, book_id) != 0 && addBookRepo.countBookByID (book_id) != 0) {
+            throw new BookAndReviewExistedException("Book record has already been recorded in the database and you have already gotten a review on the book!");
+        }
     }
 }
     

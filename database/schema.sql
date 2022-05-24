@@ -30,7 +30,7 @@ create table books (
 --create review table
 create table reviews (
     review_id int not null auto_increment,
-    status enum('Want to read', 'Currently reading', 'Read') not null,
+    status enum('Want to read', 'Currently reading', 'Read') default 'Want to read',
     rating float,
     comment varchar(512),
 
